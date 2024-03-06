@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-@Configuration 
+@Configuration  // Indica que é uma classe de configuração
 public class instatiation implements CommandLineRunner {
 
     @Autowired
