@@ -1,5 +1,6 @@
 package org.sebastiandev.springbootmongodbapplication.domain;
 
+import org.sebastiandev.springbootmongodbapplication.dto.AuthorDTO;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -13,13 +14,13 @@ public class Post implements Serializable {
     private Date date;
     private String title;
     private String content;
-    private User author;
+    private AuthorDTO author;
 
     public Post() {
 
     }
 
-    public Post(String id, Date date, String title, String content, User author) {
+    public Post(String id, Date date, String title, String content, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -27,11 +28,11 @@ public class Post implements Serializable {
         this.author = author;
     }
 
-    public User getAuthor() {
+    public AuthorDTO getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(AuthorDTO author) {
         this.author = author;
     }
 
