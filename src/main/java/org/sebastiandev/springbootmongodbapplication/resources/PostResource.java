@@ -2,6 +2,7 @@ package org.sebastiandev.springbootmongodbapplication.resources;
 
 
 import org.sebastiandev.springbootmongodbapplication.domain.Post;
+import org.sebastiandev.springbootmongodbapplication.resources.util.URL;
 import org.sebastiandev.springbootmongodbapplication.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,12 @@ public class PostResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Post>> findAll() {
 		List<Post> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	@RequestMapping(value="/titlesearch", method=RequestMethod.GET)
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text) {
+		text = URL.decodeParam(text);
+		List<Post> list = service.findByTitle(text);
 		return ResponseEntity.ok().body(list);
 	}
 }
