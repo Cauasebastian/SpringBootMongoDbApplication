@@ -1,7 +1,9 @@
 package org.sebastiandev.springbootmongodbapplication.services;
 
 import org.sebastiandev.springbootmongodbapplication.domain.User;
+import org.sebastiandev.springbootmongodbapplication.dto.UserDTO;
 import org.sebastiandev.springbootmongodbapplication.reposistory.UserRepository;
+import org.sebastiandev.springbootmongodbapplication.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,19 @@ public class UserService {
 
     public List<User> findAll() {
         return repo.findAll();
+    }
+    public User findById(String id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+    public User fromDTO(UserDTO obj) {
+        return new User(obj.getId(), obj.getName(), obj.getEmail());
+    }
+    public void delete(String id) {
+        findById(id);
+        repo.deleteById(id);
     }
 }
