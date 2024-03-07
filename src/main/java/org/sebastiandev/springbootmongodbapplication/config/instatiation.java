@@ -3,6 +3,7 @@ package org.sebastiandev.springbootmongodbapplication.config;
 import org.sebastiandev.springbootmongodbapplication.domain.Post;
 import org.sebastiandev.springbootmongodbapplication.domain.User;
 import org.sebastiandev.springbootmongodbapplication.dto.AuthorDTO;
+import org.sebastiandev.springbootmongodbapplication.dto.CommentDTO;
 import org.sebastiandev.springbootmongodbapplication.reposistory.PostRepository;
 import org.sebastiandev.springbootmongodbapplication.reposistory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class instatiation implements CommandLineRunner {
 
         Post post1 = new Post(null, sdf.parse("06/03/2024"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!",new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("23/03/2024"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
+           CommentDTO c1 = new CommentDTO("Boa viagem mano!",sdf.parse("20/03/2024"), new AuthorDTO(alex));
+           CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("25/03/2024"), new AuthorDTO(bob));
+           CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2024"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
+
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
